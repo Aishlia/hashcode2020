@@ -175,13 +175,13 @@ def main(s: str):
     container = container[2:]
     lib_list = []
     while (len(container) >= 2):
-        print(container[0], container[1])
         if (not container[0].strip() == "" or not container[1].strip() == ""):
             lib_list.append(Library(container[0], container[1], data))
             container = container[2:]
         else:
             break
 
+    print("hit")
     selected = []
     for i in lib_list:
         lowest = 0
@@ -194,7 +194,7 @@ def main(s: str):
             i += 1
         selected.append(chosen)
 
-
+    print("printing")
     file = open("ans3.txt", "w")
     file.write(str(len(selected)) + "\n")
     i = 0

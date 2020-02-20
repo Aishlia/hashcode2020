@@ -125,7 +125,7 @@ def problembcode(lib_list):
         output = ''
         output += str(lnum)
         output += ' '
-        ouput += str(len(library[lnum].book_table))
+        output += str(len(library[lnum].book_table))
         output += "\n"
         file.write(output)
         output = ''
@@ -156,7 +156,7 @@ def problemccode(lib_list):
         output = ''
         output += str(lnum)
         output += ' '
-        ouput += str(len(library[lnum].book_table))
+        output += str(len(library[lnum].book_table))
         output += "\n"
         file.write(output)
         output = ''
@@ -166,22 +166,7 @@ def problemccode(lib_list):
         output += "\n"
         file.write(output)
 
-
-def main(s: str):
-    file = open("c_incunabula.txt")
-    container = file.read().splitlines()
-    data = Dataset(container[0], container[1])
-    print("Data metadata parsed")
-    container = container[2:]
-    lib_list = []
-    while (len(container) >= 2):
-        if (not container[0].strip() == "" or not container[1].strip() == ""):
-            lib_list.append(Library(container[0], container[1], data))
-            container = container[2:]
-        else:
-            break
-
-    print("hit")
+def problemdcode(lib_list):
     selected = []
     for i in lib_list:
         lowest = 0
@@ -194,7 +179,7 @@ def main(s: str):
             i += 1
         selected.append(chosen)
 
-    print("printing")
+
     file = open("ans3.txt", "w")
     file.write(str(len(selected)) + "\n")
     i = 0
@@ -202,7 +187,7 @@ def main(s: str):
         output = ''
         output += str(lnum)
         output += ' '
-        ouput += str(len(library[lnum].book_table))
+        output += str(len(library[lnum].book_table))
         output += "\n"
         file.write(output)
         output = ''
@@ -213,5 +198,51 @@ def main(s: str):
         file.write(output)
 
 
+def main(s: str):
+    file = open("e.txt")
+    container = file.read().splitlines()
+    data = Dataset(container[0], container[1])
+    print("Data metadata parsed")
+    container = container[2:]
+    lib_list = []
+    while (len(container) >= 2):
+        if (not container[0].strip() == "" or not container[1].strip() == ""):
+            lib_list.append(Library(container[0], container[1], data))
+            container = container[2:]
+        else:
+            break
+
+    selected = []
+    for i in lib_list:
+        lowest = 0
+        chosen = -1
+        i = 0
+        for library in lib_list:
+            if (library.total_score/library.num_days > lowest) and not (i in selected):
+                lowest = library.num_days
+                chosen = i
+            i += 1
+        selected.append(chosen)
+
+
+    file = open("ans3.txt", "w")
+    file.write(str(len(selected)) + "\n")
+    i = 0
+    for lnum in selected:
+        output = ''
+        output += str(lnum)
+        output += ' '
+        output += str(lib_list[lnum].num_books)
+        output += "\n"
+        file.write(output)
+        output = ''
+        for book in lib_list[lnum].book_table:
+            output += str(book)
+            output += ' '
+        output += "\n"
+        file.write(output)
+
+
 if __name__ == '__main__':
     main(sys.argv)
+

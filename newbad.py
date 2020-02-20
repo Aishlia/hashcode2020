@@ -168,7 +168,7 @@ def problemccode(lib_list):
 
 
 def main(s: str):
-    file = open("b.txt")
+    file = open("c_incunabula.txt")
     container = file.read().splitlines()
     data = Dataset(container[0], container[1])
     print("Data metadata parsed")

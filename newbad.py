@@ -103,7 +103,7 @@ class SolutionLibrary:
             line2 += str(book) + " "
         return line1 + "\n" + line2
 
-def problembcode():
+def problembcode(lib_list):
     selected = []
     for i in lib_list:
         lowest = 1000
@@ -168,7 +168,7 @@ def problemccode(lib_list):
 
 
 def main(s: str):
-    file = open("c_incunabula.txt")
+    file = open("b.txt")
     container = file.read().splitlines()
     data = Dataset(container[0], container[1])
     print("Data metadata parsed")
@@ -182,17 +182,17 @@ def main(s: str):
         else:
             break
 
-        selected = []
-        for i in lib_list:
-            lowest = 0
-            chosen = -1
-            i = 0
-            for library in lib_list:
-                if (library.total_score/library.num_days > lowest) and not (i in selected):
-                    lowest = library.num_days
-                    chosen = i
-                i += 1
-            selected.append(chosen)
+    selected = []
+    for i in lib_list:
+        lowest = 0
+        chosen = -1
+        i = 0
+        for library in lib_list:
+            if (library.total_score/library.num_days > lowest) and not (i in selected):
+                lowest = library.num_days
+                chosen = i
+            i += 1
+        selected.append(chosen)
 
 
     file = open("ans3.txt", "w")
